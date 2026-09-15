@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Simple Stock Tracker</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+</head>
+<body>
+    <main class="container">
+        <header>
+            <h1>Simple Stock Tracker</h1>
+            <p>
+                Add stock investments using manually defined prices and
+                calculate total investment value.
+            </p>
+        </header>
+
+        <section class="card">
+            <h2>Add Investment</h2>
+
+            <form id="investment-form" class="form-grid">
+                <div class="field">
+                    <label for="symbol">Stock Symbol</label>
+                    <input
+                        id="symbol"
+                        name="symbol"
+                        type="text"
+                        list="stock-list"
+                        placeholder="AAPL"
+                        autocomplete="off"
+                        required
+                    >
+
+                    <datalist id="stock-list"></datalist>
+                </div>
+
+                <div class="field">
+                    <label for="quantity">Quantity</label>
+                    <input
+                        id="quantity"
+                        name="quantity"
+                        type="number"
+                        min="0.000001"
+                        step="any"
+                        placeholder="10"
+                        required
+                    >
+                </div>
+
+                <button type="submit">Add Investment</button>
+            </form>
+
+            <p id="form-message" class="message" aria-live="polite"></p>
+        </section>
+
+        <section class="card">
+            <div class="section-header">
+                <h2>Portfolio</h2>
+
+                <div class="button-group">
+                    <button
+                        id="save-csv"
+                        type="button"
+                        class="secondary"
+                        disabled
+                    >
+                        Save CSV
+                    </button>
+
+                    <button
+                        id="save-txt"
+                        type="button"
+                        class="secondary"
+                        disabled
+                    >
+                        Save TXT
+                    </button>
+
+                    <button
+                        id="clear-portfolio"
+                        type="button"
+                        class="danger"
+                        disabled
+                    >
+                        Clear
+                    </button>
+                </div>
+            </div>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Symbol</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="portfolio-body"></tbody>
+
+                    <tfoot>
+                        <tr>
+                            <td colspan="3">Total Investment</td>
+                            <td id="total-value">$0.00</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+
+            <p id="save-message" class="message" aria-live="polite"></p>
+        </section>
+
+        <section class="card">
+            <h2>Available Stock Prices</h2>
+
+            <ul id="price-list" class="price-list"></ul>
+        </section>
+    </main>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
